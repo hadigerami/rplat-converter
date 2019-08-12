@@ -1357,7 +1357,7 @@ def Convert(filePath,
     if not lResult:
         print "\n\nAn error occurred while loading the scene..."
         sys.exit()
-
+    
     lBasename, lExt = os.path.splitext(ouptutFile)
     FbxAxisSystem.OpenGL.ConvertScene(lScene)
     PrepareBakeTransform(lScene.GetRootNode())
@@ -1541,12 +1541,12 @@ if __name__ == '__main__':
     textureArray = fbx.FbxTextureArray()
     scene.FillTextureArray(textureArray)
     mFbxTexturesDir = os.path.join(mFbxDir, 'textures')
-    mGltfTexturesDir = os.path.join(mGltfDir, 'textures')
+    # mGltfTexturesDir = os.path.join(mGltfDir, 'textures')
     if textureArray.GetCount() > 0:
         if not os.path.exists(mFbxTexturesDir):
             os.makedirs(mFbxTexturesDir)
-        if not os.path.exists(mGltfTexturesDir):
-            os.makedirs(mGltfTexturesDir)
+        # if not os.path.exists(mGltfTexturesDir):
+            # os.makedirs(mGltfTexturesDir)
 
     for i in range(0, textureArray.GetCount()):
         texture = textureArray.GetAt(i)
@@ -1582,7 +1582,7 @@ if __name__ == '__main__':
                     #TODO: resizing down images
                 im.save(mTextureFullPath)
 
-            shutil.copy(mTextureFullPath, mGltfTexturesDir)
+            # shutil.copy(mTextureFullPath, mGltfTexturesDir)
             texture.SetFileName(mTextureFullPath)
 
     exporter = fbx.FbxExporter.Create(manager, "")
@@ -1598,14 +1598,14 @@ if __name__ == '__main__':
     print 'FBX file was saved successfully'
 
     Convert(mExportedFbx,
-            os.path.join(mGltfDir,"scene.gltf"),
+            os.path.join(mGltfDir,"scene.glb"),
             excluded,
             1.0 / float(args.framerate),
             lStartTime,
             lDuration,
             lPoseTime,
             True,
-            False)
+            True)
 
 
 
