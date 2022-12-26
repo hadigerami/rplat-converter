@@ -1,6 +1,6 @@
 pip==19.2.1
 setuptools==41.0.1
-wheel==0.33.4
+wheel==0.38.1
 pathlib
 pillow
 slugify
